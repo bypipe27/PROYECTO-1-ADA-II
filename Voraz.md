@@ -37,29 +37,36 @@ En cada paso, **siempre** elegir el corte cuya relación precio/longitud sea má
 
 **Algoritmo voraz:**
 
-```
-CORTE_VORAZ(varilla_longitud, tabla_precios)
-    ganancia_total ← 0
-    longitud_restante ← varilla_longitud
-    piezas_cortadas ← []
-    
-    MIENTRAS longitud_restante > 0:
-        // Encontrar la mejor relación precio/longitud disponible
-        mejor_relacion ← -∞
-        mejor_longitud ← 0
-        
-        PARA i ← 1 hasta longitud_restante:
-            relacion_actual ← tabla_precios[i] / i
-            SI relacion_actual > mejor_relacion:
-                mejor_relacion ← relacion_actual
-                mejor_longitud ← i
-        
-        // Hacer el corte
-        ganancia_total ← ganancia_total + tabla_precios[mejor_longitud]
-        piezas_cortadas.agregar(mejor_longitud)
-        longitud_restante ← longitud_restante - mejor_longitud
-    
-    RETORNAR (ganancia_total, piezas_cortadas)
+```python
+def seleccionar_segmentos(segmentos_ordenados, longitud_varilla):
+    ganancias_total = 0
+    segmentos_seleccionados = []
+
+    while longitud_varilla > 0:
+        mejor_segmento = None
+        for s in segmentos_ordenados:
+            if s["longitud"] <= longitud_varilla:
+                mejor_segmento = s
+                break
+        if mejor_segmento is None:
+            break
+
+        ganancias_total += mejor_segmento["precio"]
+        longitud_varilla -= mejor_segmento["longitud"]
+        segmentos_seleccionados.append(mejor_segmento)
+
+    return ganancias_total, segmentos_seleccionados
+
+
+def voraz(longitud_varilla, precio_dic):
+    segmentos = []
+    for longitud, precio in precio_dic.items():
+        rendimiento = (precio / longitud)  # rendimiento: precio por unidad
+        segmentos.append({"longitud": longitud, "precio": precio, "rendimiento": rendimiento})
+
+    # Ordeno por rendimiento (descendente) y selecciono repetidamente
+    segmentos.sort(key=lambda x: x["rendimiento"], reverse=True)
+    return seleccionar_segmentos(segmentos, longitud_varilla)
 ```
 
 **Complejidad temporal:** $O(n^2)$ en el peor caso.
@@ -234,3 +241,5 @@ Esto refuerza que algoritmos voraces, aunque intuitivos, no siempre garantizan o
 | Prioridad es **velocidad** | **Voraz** | Si una solución "buena" es suficiente |
 | Sistema **tiempo real** | **Voraz** | No hay tiempo para DP |
 | **Análisis académico** | **PD** | Demuestra comprensión profunda |
+
+---
