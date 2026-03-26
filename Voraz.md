@@ -207,14 +207,14 @@ Esto refuerza que algoritmos voraces, aunque intuitivos, no siempre garantizan o
 
 ---
 
-## 5. Conclusiones: Lo Que Debes Recordar
+## 5. Conclusiones: 
 
-### 5.1 Las 3 Conclusiones Principales (Exactas a Clase)
+### 5.1 Las 3 Conclusiones Principales
 
 **"Voraz es simple y rápido."**
 - ✓ Fácil implementar
 - ✓ Complejidad razonable $O(n^2)$
-- ✓ No necesita memoria adicional ($O(1)$)
+- ✓ No necesita memoria adicional $O(1)$
 
 **"No siempre es correcto."**
 - ✗ No garantiza solución óptima
@@ -234,24 +234,3 @@ Esto refuerza que algoritmos voraces, aunque intuitivos, no siempre garantizan o
 | Prioridad es **velocidad** | **Voraz** | Si una solución "buena" es suficiente |
 | Sistema **tiempo real** | **Voraz** | No hay tiempo para DP |
 | **Análisis académico** | **PD** | Demuestra comprensión profunda |
-
-### 5.3 Recomendación Final para Tu Proyecto
-
-Para **corte óptimo de varilla**:
-
-1. **Implementa ambos:** Muestra que entiendes ambas técnicas
-2. **Explica diferencias:** Deja claro por qué uno puede fallar
-3. **Compara resultados:** Con ejemplos concretos (como hicimos)
-4. **Elige PD para proyecto:** Es más defensible académicamente
-
----
-
-## Resumen: ¿Voraz o PD?
-
-```
-Voraz:     Rápido   ✓  |  Óptimo     ✗
-PD:        Rápido   ✓  |  Óptimo     ✓
-```
-
-**Por eso los algoritmos voraces son útiles en la industria (rápidos), 
-pero en clase usamos PD (enseña a pensar en optimalidad).**
