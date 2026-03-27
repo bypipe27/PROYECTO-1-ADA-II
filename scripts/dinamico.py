@@ -31,9 +31,14 @@ def resolver_dinamico(precios, n):
     # Paso 4: Reconstruir los segmentos usando la lista de rastreo
     segmentos = []
     i = n
-    while i > 0:
-        segmentos.append(corte[i])  # agregar el corte óptimo
-        i -= corte[i]               # reducir la varilla restante
+    while i > 0 and corte[i] > 0:
+        longitud = corte[i]
+        segmentos.append({
+            "longitud": longitud,
+            "precio": precios[longitud],
+            "rendimiento": precios[longitud] / longitud
+        })
+        i -= longitud
 
     return dp[n], segmentos
 
