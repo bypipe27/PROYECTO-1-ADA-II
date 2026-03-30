@@ -16,23 +16,28 @@ def resolver_dinamico(precios, n):
 
     # Paso 3: Llenar la tabla dp desde longitud 1 hasta n
     for i in range(1, n + 1):
+        max_valor = float('-inf')
 
-        # Probar todos los cortes posibles j para la longitud i
-        for j in range(1, i + 1):
+        # Probar solo los cortes que existen en el diccionario
+        for j in precios:
+            if j <= i:  # solo si el corte es válido
+                valor = precios[j] + dp[i - j]
 
-            # Solo considerar si existe precio para esa longitud
-            if j in precios:
-
-                # Si este corte da mejor ganancia, actualizar dp[i]
-                if precios[j] + dp[i - j] > dp[i]:
-                    dp[i] = precios[j] + dp[i - j]
+                if valor > max_valor:
+                    max_valor = valor
                     corte[i] = j  # guardar qué corte fue el óptimo
+
+        dp[i] = max_valor
 
     # Paso 4: Reconstruir los segmentos usando la lista de rastreo
     segmentos = []
     i = n
-    while i > 0 and corte[i] > 0:
+    while i > 0:
         longitud = corte[i]
+
+        if longitud == 0:
+            break
+
         segmentos.append({
             "longitud": longitud,
             "precio": precios[longitud],
@@ -47,13 +52,12 @@ if __name__ == "__main__":
 
     # Ejemplo: caso donde PD supera al voraz
     precios = {1: 1, 2: 5, 3: 8} 
-    n = 100000
+    n = 1000
 
     ganancia, segmentos = resolver_dinamico(precios, n)
 
     print(f"Varilla de longitud: {n}")
     print(f"Precios: {precios}")
     print(f"\nGanancia óptima: ${ganancia}")
-    print("Segmentos seleccionados:")
-    for s in segmentos:
-        print(f"  Longitud: {s} | Precio: ${precios[s]}")
+    cortes = [s['longitud'] for s in segmentos]
+    print("Cortes a realizar:", cortes)
