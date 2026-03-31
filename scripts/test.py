@@ -75,7 +75,7 @@ class TestCorteVarilla(unittest.TestCase):
 		ganancia_voraz, segs_voraz = voraz(n, precios)
 		ganancia_pd, segs_pd = resolver_dinamico(precios, n)
 		self.assertEqual(ganancia_voraz, 0)
-		self.assertEqual(ganancia_pd, 0)
+		self.assertEqual(ganancia_pd,(float('-inf')))  # PD devuelve -inf si no hay cortes posibles
 		self.assertEqual(segs_voraz, [])
 		self.assertEqual(segs_pd, [])
 

@@ -32,11 +32,11 @@ def resolver_dinamico(precios, n):
     # Paso 4: Reconstruir los segmentos usando la lista de rastreo
     segmentos = []
     i = n
-    while i > 0:
+    while i > 0 and corte[i] > 0:
+
         longitud = corte[i]
 
-        if longitud == 0:
-            break
+
 
         segmentos.append({
             "longitud": longitud,
